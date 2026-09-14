@@ -1,0 +1,550 @@
+{
+  "ayla": {
+    "frameW": 362,
+    "frameH": 512,
+    "frames": [
+      {
+        "name": "idle1",
+        "file": "assets/characters/ayla/idle1.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "idle2",
+        "file": "assets/characters/ayla/idle2.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "aimL",
+        "file": "assets/characters/ayla/aimL.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "aimR",
+        "file": "assets/characters/ayla/aimR.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "windup",
+        "file": "assets/characters/ayla/windup.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "shoot",
+        "file": "assets/characters/ayla/shoot.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "victory",
+        "file": "assets/characters/ayla/victory.png",
+        "w": 362,
+        "h": 512
+      },
+      {
+        "name": "hurt",
+        "file": "assets/characters/ayla/hurt.png",
+        "w": 362,
+        "h": 512
+      }
+    ]
+  },
+  "bram": {
+    "frameW": 362,
+    "frameH": 495,
+    "frames": [
+      {
+        "name": "idle1",
+        "file": "assets/characters/bram/idle1.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "idle2",
+        "file": "assets/characters/bram/idle2.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "guard",
+        "file": "assets/characters/bram/guard.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "punch",
+        "file": "assets/characters/bram/punch.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "windup",
+        "file": "assets/characters/bram/windup.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "slam",
+        "file": "assets/characters/bram/slam.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "victory",
+        "file": "assets/characters/bram/victory.png",
+        "w": 362,
+        "h": 495
+      },
+      {
+        "name": "hurt",
+        "file": "assets/characters/bram/hurt.png",
+        "w": 362,
+        "h": 495
+      }
+    ]
+  },
+  "lumi": {
+    "frameW": 362,
+    "frameH": 498,
+    "frames": [
+      {
+        "name": "idle1",
+        "file": "assets/characters/lumi/idle1.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "idle2",
+        "file": "assets/characters/lumi/idle2.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "castL",
+        "file": "assets/characters/lumi/castL.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "castR",
+        "file": "assets/characters/lumi/castR.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "windup",
+        "file": "assets/characters/lumi/windup.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "cast",
+        "file": "assets/characters/lumi/cast.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "victory",
+        "file": "assets/characters/lumi/victory.png",
+        "w": 362,
+        "h": 498
+      },
+      {
+        "name": "hurt",
+        "file": "assets/characters/lumi/hurt.png",
+        "w": 362,
+        "h": 498
+      }
+    ]
+  },
+  "frog": {
+    "frameW": 482,
+    "frameH": 515,
+    "frames": [
+      {
+        "name": "idle1",
+        "file": "assets/bosses/frog/idle1.png",
+        "w": 482,
+        "h": 515
+      },
+      {
+        "name": "idle2",
+        "file": "assets/bosses/frog/idle2.png",
+        "w": 482,
+        "h": 515
+      },
+      {
+        "name": "charge",
+        "file": "assets/bosses/frog/charge.png",
+        "w": 482,
+        "h": 515
+      },
+      {
+        "name": "jump",
+        "file": "assets/bosses/frog/jump.png",
+        "w": 482,
+        "h": 515
+      },
+      {
+        "name": "hurt",
+        "file": "assets/bosses/frog/hurt.png",
+        "w": 482,
+        "h": 515
+      },
+      {
+        "name": "defeat",
+        "file": "assets/bosses/frog/defeat.png",
+        "w": 482,
+        "h": 515
+      }
+    ]
+  },
+  "crab": {
+    "frameW": 482,
+    "frameH": 504,
+    "frames": [
+      {
+        "name": "idle1",
+        "file": "assets/bosses/crab/idle1.png",
+        "w": 482,
+        "h": 504
+      },
+      {
+        "name": "idle2",
+        "file": "assets/bosses/crab/idle2.png",
+        "w": 482,
+        "h": 504
+      },
+      {
+        "name": "raise",
+        "file": "assets/bosses/crab/raise.png",
+        "w": 482,
+        "h": 504
+      },
+      {
+        "name": "slam",
+        "file": "assets/bosses/crab/slam.png",
+        "w": 482,
+        "h": 504
+      },
+      {
+        "name": "hurt",
+        "file": "assets/bosses/crab/hurt.png",
+        "w": 482,
+        "h": 504
+      },
+      {
+        "name": "defeat",
+        "file": "assets/bosses/crab/defeat.png",
+        "w": 482,
+        "h": 504
+      }
+    ]
+  },
+  "owl": {
+    "frameW": 482,
+    "frameH": 514,
+    "frames": [
+      {
+        "name": "idle1",
+        "file": "assets/bosses/owl/idle1.png",
+        "w": 482,
+        "h": 514
+      },
+      {
+        "name": "idle2",
+        "file": "assets/bosses/owl/idle2.png",
+        "w": 482,
+        "h": 514
+      },
+      {
+        "name": "wings",
+        "file": "assets/bosses/owl/wings.png",
+        "w": 482,
+        "h": 514
+      },
+      {
+        "name": "gust",
+        "file": "assets/bosses/owl/gust.png",
+        "w": 482,
+        "h": 514
+      },
+      {
+        "name": "hurt",
+        "file": "assets/bosses/owl/hurt.png",
+        "w": 482,
+        "h": 514
+      },
+      {
+        "name": "defeat",
+        "file": "assets/bosses/owl/defeat.png",
+        "w": 482,
+        "h": 514
+      }
+    ]
+  },
+  "fx_leaf": {
+    "frameW": 359,
+    "frameH": 246,
+    "frames": [
+      {
+        "file": "assets/effects/leaf/0.png",
+        "w": 359,
+        "h": 246
+      },
+      {
+        "file": "assets/effects/leaf/1.png",
+        "w": 359,
+        "h": 246
+      },
+      {
+        "file": "assets/effects/leaf/2.png",
+        "w": 359,
+        "h": 246
+      },
+      {
+        "file": "assets/effects/leaf/3.png",
+        "w": 359,
+        "h": 246
+      }
+    ]
+  },
+  "fx_water": {
+    "frameW": 361,
+    "frameH": 263,
+    "frames": [
+      {
+        "file": "assets/effects/water/0.png",
+        "w": 361,
+        "h": 263
+      },
+      {
+        "file": "assets/effects/water/1.png",
+        "w": 361,
+        "h": 263
+      },
+      {
+        "file": "assets/effects/water/2.png",
+        "w": 361,
+        "h": 263
+      },
+      {
+        "file": "assets/effects/water/3.png",
+        "w": 361,
+        "h": 263
+      }
+    ]
+  },
+  "fx_fire": {
+    "frameW": 362,
+    "frameH": 258,
+    "frames": [
+      {
+        "file": "assets/effects/fire/0.png",
+        "w": 362,
+        "h": 258
+      },
+      {
+        "file": "assets/effects/fire/1.png",
+        "w": 362,
+        "h": 258
+      },
+      {
+        "file": "assets/effects/fire/2.png",
+        "w": 362,
+        "h": 258
+      },
+      {
+        "file": "assets/effects/fire/3.png",
+        "w": 362,
+        "h": 258
+      }
+    ]
+  },
+  "fx_wind": {
+    "frameW": 362,
+    "frameH": 263,
+    "frames": [
+      {
+        "file": "assets/effects/wind/0.png",
+        "w": 362,
+        "h": 263
+      },
+      {
+        "file": "assets/effects/wind/1.png",
+        "w": 362,
+        "h": 263
+      },
+      {
+        "file": "assets/effects/wind/2.png",
+        "w": 362,
+        "h": 263
+      },
+      {
+        "file": "assets/effects/wind/3.png",
+        "w": 362,
+        "h": 263
+      }
+    ]
+  },
+  "orbs": {
+    "frameW": 350,
+    "frameH": 356,
+    "frames": [
+      {
+        "name": "leaf",
+        "file": "assets/orbs/leaf.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "water",
+        "file": "assets/orbs/water.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "fire",
+        "file": "assets/orbs/fire.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "wind",
+        "file": "assets/orbs/wind.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "stone",
+        "file": "assets/orbs/stone.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "bloom",
+        "file": "assets/orbs/bloom.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "shell",
+        "file": "assets/orbs/shell.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "vinecore",
+        "file": "assets/orbs/vinecore.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "cracked",
+        "file": "assets/orbs/cracked.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "heal",
+        "file": "assets/orbs/heal.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "blaze",
+        "file": "assets/orbs/blaze.png",
+        "w": 350,
+        "h": 356
+      },
+      {
+        "name": "prism",
+        "file": "assets/orbs/prism.png",
+        "w": 350,
+        "h": 356
+      }
+    ]
+  },
+  "objects": {
+    "frameW": 362,
+    "frameH": 362,
+    "frames": [
+      {
+        "name": "vine_barrier",
+        "file": "assets/objects/vine_barrier.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "shell_barrier",
+        "file": "assets/objects/shell_barrier.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "totem",
+        "file": "assets/objects/totem.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "flower_cluster",
+        "file": "assets/objects/flower_cluster.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "ruin_pillar",
+        "file": "assets/objects/ruin_pillar.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "lily_pad",
+        "file": "assets/objects/lily_pad.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "frog_idol",
+        "file": "assets/objects/frog_idol.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "crab_idol",
+        "file": "assets/objects/crab_idol.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "owl_branch",
+        "file": "assets/objects/owl_branch.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "current_swirl",
+        "file": "assets/objects/current_swirl.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "gust_totem",
+        "file": "assets/objects/gust_totem.png",
+        "w": 362,
+        "h": 362
+      },
+      {
+        "name": "relic_seed",
+        "file": "assets/objects/relic_seed.png",
+        "w": 362,
+        "h": 362
+      }
+    ]
+  }
+}
