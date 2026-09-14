@@ -4,7 +4,7 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
@@ -19,6 +19,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Reconstruct full separated site
+        shell: bash
+        run: |
+          rm -rf _site
+          mkdir _site
+          cat .pages-bundle/part* | base64 -d > /tmp/mystic-grove-pages.zip
+          unzip -q /tmp/mystic-grove-pages.zip -d _site
+          touch _site/.nojekyll
+      - name: Materialize separated project files on main
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github ! -name _site -exec rm -rf {} +
+          cp -R _site/. .
+          rm -rf .pages-bundle _site
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Publica Mystic Grove v0.8.0 com estrutura separada"
+            git push origin HEAD:main
+          fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
