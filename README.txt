@@ -1,23 +1,21 @@
-MYSTIC GROVE v0.8.0
+MYSTIC GROVE v0.9.0
 
-NOVIDADES
-- mapa visual da campanha com as 9 regiões
-- resumo de estrelas, missões e relíquias
-- Relíquias regionais: conquiste 3 estrelas + missão da fase
-- eventos aleatórios de trilha com efeitos reais no gameplay
-- registro permanente dos eventos encontrados
-- novo Bosque Infinito desbloqueado após derrotar o Coração do Bosque
-- ondas progressivas com dificuldade crescente
-- recompensas de Essência por onda
-- recorde permanente do Bosque Infinito
-- novas conquistas ligadas a Relíquias e modo infinito
-- integração com o save existente sem apagar progresso antigo
+Atualização de interface e apresentação do gameplay baseada na revisão visual da versão publicada no GitHub Pages.
 
-RELÍQUIAS
-Uma Relíquia é recebida na primeira vitória em que a fase termina com 3 estrelas e sua missão secundária também é concluída.
-
-BOSQUE INFINITO
-É desbloqueado após derrotar o Coração do Bosque. Cada onda reconstrói o tabuleiro com mais dificuldade. A pontuação continua e cada onda concluída entrega Essência imediatamente.
+PRINCIPAIS MELHORIAS
+- correção definitiva da proporção do canvas: 900x1200 exibido em 3:4 sem esticar
+- interface desktop reorganizada em três áreas: informações, jogo e guardião
+- laterais antes vazias agora exibem trilha, missão, elementos, personagem e próximos disparos
+- HUD superior mais compacta e legível
+- tabuleiro com contraste melhor e grade visual mais discreta
+- sprites das peças ligeiramente menores para evitar sobreposição visual
+- overlays de cipó, carapaça, totem e flor menos agressivos
+- personagem e lançador reposicionados e reduzidos para liberar área visual
+- linha de mira mais fina e longa
+- painel de missão lateral com barra de progresso
+- informações de disparo atual e próximo também disponíveis no painel lateral
+- comportamento responsivo: painéis laterais somem em telas menores
+- celulares continuam usando o canvas vertical sem deformação
 
 CONTROLES
 Mouse/toque: mirar e soltar

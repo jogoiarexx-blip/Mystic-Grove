@@ -53,7 +53,7 @@
           <div class="feature-box"><strong>Progressão</strong><small>Desbloqueio local de trilhas e desafios mais difíceis.</small></div>
         </div>
 
-        <small>Jogo original • v0.8.0</small>
+        <small>Jogo original • v0.9.0</small>
       </div>
     </section>
 
@@ -145,41 +145,84 @@
       </div>
     </section>
 
-    <section id="game" class="screen">
+    <section id="game" class="screen game-screen">
       <div class="hud ornate-hud">
         <div class="hud-box"><span class="hud-label">Fase</span><strong id="hudLevel">1</strong></div>
         <div class="hud-box"><span class="hud-label">Pontos</span><strong id="hudScore">0</strong></div>
         <div class="hud-box"><span class="hud-label">Jogadas</span><strong id="hudMoves">0</strong></div>
         <div class="hud-box"><span class="hud-label">Objetivo</span><strong id="hudGoal">0</strong></div>
-        <div class="goal-meter"><span id="goalBar"></span></div>
+        <div class="goal-meter" aria-label="Progresso da fase"><span id="goalBar"></span></div>
         <div class="hud-mission"><span>Missão</span><strong id="hudMission">—</strong></div>
         <button id="skillBtn" class="skill-btn">Habilidade</button>
-        <button id="pauseBtn">Ⅱ</button>
+        <button id="pauseBtn" aria-label="Pausar">Ⅱ</button>
       </div>
 
-      <div id="canvasWrap">
-        <canvas id="gameCanvas" width="900" height="1200"></canvas>
-        <div id="toast"></div>
-        <div id="pauseOverlay" class="overlay hidden">
-          <div class="panel premium-panel">
-            <h2>Pausado</h2>
-            <button id="resumeBtn" class="primary">Continuar</button>
-            <button id="restartBtn">Reiniciar</button>
-            <button id="quitBtn">Sair</button>
+      <div class="game-shell">
+        <aside class="game-side left-side">
+          <div class="side-card">
+            <span class="side-kicker">TRILHA ATUAL</span>
+            <strong id="sideStageName">Bosque dos Cipós</strong>
+            <small id="sideStageDesc">Combine elementos e mantenha o tabuleiro sob controle.</small>
+          </div>
+          <div class="side-card side-mission-card">
+            <span class="side-kicker">MISSÃO</span>
+            <strong id="sideMission">—</strong>
+            <div class="mini-progress"><span id="sideMissionBar"></span></div>
+          </div>
+          <div class="side-card compact">
+            <span class="side-kicker">ELEMENTOS</span>
+            <div class="element-legend">
+              <span>🍃 Folha</span><span>💧 Água</span><span>🔥 Fogo</span><span>💨 Vento</span><span>🪨 Pedra</span>
+            </div>
+          </div>
+        </aside>
+
+        <div id="canvasWrap">
+          <canvas id="gameCanvas" width="900" height="1200"></canvas>
+          <div id="toast"></div>
+          <div id="pauseOverlay" class="overlay hidden">
+            <div class="panel premium-panel">
+              <h2>Pausado</h2>
+              <button id="resumeBtn" class="primary">Continuar</button>
+              <button id="restartBtn">Reiniciar</button>
+              <button id="quitBtn">Sair</button>
+            </div>
+          </div>
+          <div id="resultOverlay" class="overlay hidden">
+            <div class="panel premium-panel">
+              <h2 id="resultTitle">Vitória!</h2>
+              <p id="resultText"></p>
+              <div id="resultStars" class="result-stars">☆☆☆</div>
+              <div id="resultRewards" class="result-rewards"></div>
+              <div id="missionResult" class="mission-result"></div>
+              <button id="nextBtn" class="primary">Próxima fase</button>
+              <button id="retryBtn">Jogar novamente</button>
+              <button id="resultMenuBtn">Seleção de fases</button>
+            </div>
           </div>
         </div>
-        <div id="resultOverlay" class="overlay hidden">
-          <div class="panel premium-panel">
-            <h2 id="resultTitle">Vitória!</h2>
-            <p id="resultText"></p>
-            <div id="resultStars" class="result-stars">☆☆☆</div>
-            <div id="resultRewards" class="result-rewards"></div>
-            <div id="missionResult" class="mission-result"></div>
-            <button id="nextBtn" class="primary">Próxima fase</button>
-            <button id="retryBtn">Jogar novamente</button>
-            <button id="resultMenuBtn">Seleção de fases</button>
+
+        <aside class="game-side right-side">
+          <div class="side-card character-side-card">
+            <span class="side-kicker">GUARDIÃO</span>
+            <img id="sideCharacterImg" src="assets/characters/ayla/idle1.png" alt="Guardião selecionado">
+            <strong id="sideCharacterName">Ayla</strong>
+            <small id="sideCharacterSkill">Habilidade especial disponível.</small>
           </div>
-        </div>
+          <div class="side-card compact">
+            <span class="side-kicker">CONTROLES</span>
+            <small>Mouse/toque: mire e solte</small>
+            <small>← → mirar • Espaço disparar</small>
+            <small>Q habilidade • Esc pausa</small>
+          </div>
+          <div class="side-card compact current-shot-card">
+            <span class="side-kicker">DISPARO</span>
+            <div class="shot-preview">
+              <div><small>Agora</small><img id="sideCurrentOrb" src="assets/orbs/leaf.png" alt="Orbe atual"></div>
+              <div><small>Próximo</small><img id="sideNextOrb" src="assets/orbs/water.png" alt="Próximo orbe"></div>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
   </div>
