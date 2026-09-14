@@ -1,1 +1,188 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#29452d"><title>Mystic Grove v0.8.0</title><style>*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:Trebuchet MS,system-ui;background:#172419;color:#fff4d2}button{font:inherit;font-weight:800;border:0;border-radius:13px;padding:11px 15px;background:#ead79e;color:#302719;box-shadow:0 4px 0 #836638;cursor:pointer}button.primary{background:#f2c85d}button:active{transform:translateY(2px)}.screen{display:none;width:100%;height:100%;place-items:center;padding:16px;background:radial-gradient(circle at 50% 10%,#547b4d,#1b2d20 60%,#101811)}.screen.on{display:grid}.card{width:min(94vw,820px);max-height:94vh;overflow:auto;text-align:center;background:linear-gradient(#493722f5,#271e17f7);border:4px solid #c9a76b;border-radius:25px;padding:22px;box-shadow:0 24px 70px #0007}.logo{font-size:clamp(44px,9vw,80px);margin:0;color:#f4d273;text-shadow:0 5px #68451f}.sub{opacity:.88}.actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:15px 0}.tile{background:#e8d49b;color:#31281a;border:3px solid #93713e;border-radius:17px;padding:14px;cursor:pointer}.tile.lock{opacity:.45;filter:grayscale(1);cursor:default}.tile strong{display:block;font-size:18px}.tile small{display:block;margin-top:5px}.stars{color:#9b6511;font-size:21px}.badge{display:inline-block;background:#6d402b;color:#ffe5ad;border-radius:999px;padding:3px 8px;margin-top:5px;font-size:11px}.char{font-size:50px}.currency{padding:9px 14px;background:#182419;border:2px solid #758d55;border-radius:999px;display:inline-block}.hud{position:fixed;z-index:5;top:0;left:0;right:0;height:76px;background:linear-gradient(#48331f,#261c14);border-bottom:3px solid #ad8347;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px}.hud div{min-width:76px;background:#172517;border:2px solid #687f50;border-radius:11px;padding:5px;text-align:center}.hud span{display:block;font-size:10px;opacity:.7}.hud strong{font-size:15px}.hud button{padding:9px}#wrap{position:absolute;inset:76px 0 0;display:grid;place-items:center}canvas{width:min(100vw,700px);height:100%;max-height:calc(100vh - 76px);aspect-ratio:3/4;background:#7fa265;touch-action:none;box-shadow:0 0 35px #0008}.overlay{position:absolute;inset:0;background:#101910d9;display:grid;place-items:center;z-index:9}.hide{display:none!important}#toast{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:#241c14e8;border:2px solid #d4b36c;border-radius:999px;padding:8px 13px;opacity:0;transition:.2s;z-index:7}#toast.show{opacity:1}.upgrade{display:grid;gap:7px}.bar{height:12px;background:#172117;border-radius:999px;overflow:hidden;border:1px solid #74865c}.bar i{display:block;height:100%;background:linear-gradient(90deg,#5ba348,#f2ca62);width:0}.resultStars{font-size:36px;color:#f3c65d}@media(max-width:600px){.hud{height:70px}.hud div{min-width:0;flex:1;padding:3px}.hud button{font-size:11px;padding:7px}#wrap{inset:70px 0 0}canvas{max-height:calc(100vh - 70px)}.card{padding:16px}}</style></head><body><section id="menu" class="screen on"><div class="card"><div style="font-size:52px">🌿</div><h1 class="logo">MYSTIC GROVE</h1><p class="sub">Puzzle de reações naturais, guardiões e trilhas ancestrais.</p><div class="currency">Essência: <strong id="essMenu">0 ✦</strong></div><div class="actions"><button class="primary" id="play">Jogar</button><button id="world">Mapa</button><button id="upgrades">Melhorias</button><button id="challenge">Desafios</button><button id="endless">Bosque Infinito</button><button id="sound">Som: Ligado</button></div><div class="grid"><div class="tile"><strong>9 trilhas</strong><small>Fases com vento, água, cipós, pedra e chefes.</small></div><div class="tile"><strong>3 guardiões</strong><small>Ayla, Bram e Lumi possuem habilidades próprias.</small></div><div class="tile"><strong>Progressão</strong><small>Estrelas, recordes, Essência e melhorias permanentes.</small></div><div class="tile"><strong>Rejogabilidade</strong><small>Desafios e Bosque Infinito após a campanha.</small></div></div><small>Web build • Mystic Grove v0.8.0</small></div></section><section id="chars" class="screen"><div class="card"><h2>Escolha seu guardião</h2><div id="charGrid" class="grid"></div><button data-back>Voltar</button></div></section><section id="levels" class="screen"><div class="card"><h2>Mapa das Trilhas</h2><p id="mapSummary"></p><div id="levelGrid" class="grid"></div><button data-back>Voltar</button></div></section><section id="ups" class="screen"><div class="card"><h2>Melhorias Permanentes</h2><div class="currency">Essência: <strong id="essUps">0 ✦</strong></div><div id="upGrid" class="grid"></div><button data-back>Voltar</button></div></section><section id="challenges" class="screen"><div class="card"><h2>Modo Desafio</h2><div id="challengeGrid" class="grid"></div><button data-back>Voltar</button></div></section><section id="game" class="screen"><div class="hud"><div><span>Fase</span><strong id="hLevel">1</strong></div><div><span>Pontos</span><strong id="hScore">0</strong></div><div><span>Jogadas</span><strong id="hMoves">0</strong></div><div><span>Objetivo</span><strong id="hGoal">0</strong></div><button id="skill">Habilidade</button><button id="pause">Ⅱ</button></div><div id="wrap"><canvas id="cv" width="900" height="1200"></canvas><div id="toast"></div><div id="pauseOv" class="overlay hide"><div class="card"><h2>Pausado</h2><button id="resume" class="primary">Continuar</button><button id="restart">Reiniciar</button><button id="quit">Sair</button></div></div><div id="result" class="overlay hide"><div class="card"><h2 id="rTitle">Vitória!</h2><div class="resultStars" id="rStars"></div><p id="rText"></p><div id="rReward"></div><button id="next" class="primary">Próxima</button><button id="retry">Jogar novamente</button><button id="rMenu">Mapa</button></div></div></div></section><script>const $=s=>document.querySelector(s),screens=[...document.querySelectorAll('.screen')],cv=$('#cv'),ctx=cv.getContext('2d');const W=900,H=1200,R=35,ROW=63,COL=75,TOP=105,LEFT=110,COLS=9;const C={leaf:'#70ad4d',water:'#4daee8',fire:'#e86738',wind:'#eee1a0',stone:'#898983'},E={leaf:'🍃',water:'💧',fire:'🔥',wind:'🌪️',stone:'🪨'};const levels=[['Bosque dos Cipós',['leaf','water','fire'],27,28,'vine'],['Charco do Sapo-Ancião',['leaf','water','stone'],32,30,'frog'],['Rio da Serra',['leaf','water','wind'],36,30,'current'],['Desfiladeiro do Casco',['fire','wind','stone','leaf'],40,32,'crab'],['Ruínas da Chuva',['water','stone','leaf','fire'],44,34,'totem'],['Ninho da Coruja Antiga',['leaf','water','fire','wind','stone'],48,35,'owl'],['Jardim Prismático',['leaf','water','fire','wind','stone'],52,36,'prism'],['Retorno do Casco Real',['fire','wind','stone','leaf'],56,37,'crab'],['Coração do Bosque',['leaf','water','fire','wind','stone'],62,39,'heart']];const chars=[['ayla','Ayla','🌿','Troca a próxima semente',4],['bram','Bram','🗿','Impacto quebra proteções',3],['lumi','Lumi','💧','Transforma o tiro em água',3]];const challenges={thorns:['Espinhos do Bosque','-5 jogadas iniciais',18],storm:['Tempestade Selvagem','Vento move o campo frequentemente',22],sealed:['Talismã Selado','Habilidades desativadas',28]};let save=JSON.parse(localStorage.getItem('mg-web-v08')||'null')||{unlocked:1,ess:0,stars:{},best:{},char:'ayla',sound:true,up:{moves:0,skill:0,score:0},infinite:0};let selected=save.char,challengeMode=null,infinite=false,state=null,paused=false,aim=-Math.PI/2,down=false,audio=null;function persist(){localStorage.setItem('mg-web-v08',JSON.stringify(save));refreshEss()}function refreshEss(){if($('#essMenu'))$('#essMenu').textContent=save.ess+' ✦';if($('#essUps'))$('#essUps').textContent=save.ess+' ✦'}refreshEss();function show(id){screens.forEach(s=>s.classList.toggle('on',s.id===id))}function rand(a){return a[Math.random()*a.length|0]}function key(r,c){return r+','+c}function pos(r,c){return{x:LEFT+c*COL+(r%2?COL/2:0),y:TOP+r*ROW}}function near(r,c){let e=r%2===0?[[-1,-1],[-1,0],[0,-1],[0,1],[1,-1],[1,0]]:[[-1,0],[-1,1],[0,-1],[0,1],[1,0],[1,1]];return e.map(([a,b])=>[r+a,c+b])}function beep(f=400,d=.06){if(!save.sound)return;audio||=(new(AudioContext||webkitAudioContext));let o=audio.createOscillator(),g=audio.createGain();o.frequency.value=f;g.gain.value=.035;o.connect(g);g.connect(audio.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.stop(audio.currentTime+d)}function toast(t){let x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(x.t);x.t=setTimeout(()=>x.classList.remove('show'),1400)}function renderChars(){let g=$('#charGrid');g.innerHTML='';chars.forEach(c=>{let d=document.createElement('div');d.className='tile';d.innerHTML=`<div class="char">${c[2]}</div><strong>${c[1]}</strong><small>${c[3]}</small><small>${c[4]} cargas</small>`;d.onclick=()=>{selected=c[0];save.char=c[0];persist();renderLevels();show('levels')};g.appendChild(d)})}function renderLevels(){let g=$('#levelGrid'),total=Object.values(save.stars).reduce((a,b)=>a+b,0);$('#mapSummary').innerHTML=`Estrelas: <b>${total}/27</b> • Essência: <b>${save.ess} ✦</b>`;g.innerHTML='';levels.forEach((l,i)=>{let d=document.createElement('div'),s=save.stars[i]||0;d.className='tile'+(i>=save.unlocked?' lock':'');d.innerHTML=`<strong>${i+1}. ${l[0]}</strong><span class="stars">${'★'.repeat(s)}${'☆'.repeat(3-s)}</span><small>Objetivo ${l[2]} • ${l[3]} jogadas</small>${['frog','crab','owl','heart'].includes(l[4])?'<span class="badge">CHEFE</span>':''}<small>Recorde: ${save.best[i]||0}</small>`;if(i<save.unlocked)d.onclick=()=>start(i);g.appendChild(d)})}function renderUps(){refreshEss();let defs={moves:['Fôlego da Floresta','+1 jogada inicial',3,45],skill:['Talismã do Guardião','+1 carga de habilidade',2,70],score:['Sabedoria Ancestral','+10% de pontuação',3,60]},g=$('#upGrid');g.innerHTML='';Object.entries(defs).forEach(([id,d])=>{let lv=save.up[id]||0,cost=d[3]*(lv+1),x=document.createElement('div');x.className='tile upgrade';x.innerHTML=`<strong>${d[0]}</strong><small>${d[1]}</small><b>Nível ${lv}/${d[2]}</b><button ${lv>=d[2]?'disabled':''}>${lv>=d[2]?'MÁXIMO':cost+' ✦'}</button>`;if(lv<d[2])x.querySelector('button').onclick=()=>{if(save.ess<cost)return toast('Essência insuficiente');save.ess-=cost;save.up[id]=lv+1;persist();renderUps()};g.appendChild(x)})}function renderChallenges(){let g=$('#challengeGrid');g.innerHTML='';Object.entries(challenges).forEach(([id,c])=>{let d=document.createElement('div');d.className='tile';d.innerHTML=`<strong>${c[0]}</strong><small>${c[1]}</small><small>Bônus: +${c[2]} ✦</small><button>Escolher fase</button>`;d.querySelector('button').onclick=()=>{challengeMode=id;renderLevels();show('levels')};g.appendChild(d)})}function createCells(rows,colors,wave=0){let m=new Map();for(let r=0;r<rows;r++)for(let c=0;c<COLS;c++){if(r>1&&Math.random()<.08)continue;let sp=null;if(Math.random()<Math.min(.16,.04+wave*.01))sp=wave%3===0?'shell':wave%2?'vine':'totem';m.set(key(r,c),{r,c,type:rand(colors),sp,hp:sp==='shell'?2:1})}return m}function start(i){infinite=false;let l=levels[i],moves=l[3]+save.up.moves-(challengeMode==='thorns'?5:0);state={level:i,cells:createCells(Math.min(9,6+(i/2|0)),l[1],i),score:0,cleared:0,moves,goal:l[2],current:rand(l[1]),next:rand(l[1]),proj:null,fall:[],fx:[],charges:(chars.find(c=>c[0]===selected)?.[4]||3)+save.up.skill,boss:['frog','crab','owl','heart'].includes(l[4])?3+(i>5?2:0):0,wave:0};paused=false;aim=-Math.PI/2;$('#result').classList.add('hide');show('game');hud();toast(l[0])}function startInfinite(){if(save.unlocked<=8)return toast('Derrote o Coração do Bosque primeiro');challengeMode=null;infinite=true;state={level:6,cells:createCells(6,levels[6][1],1),score:0,cleared:0,moves:28+save.up.moves,goal:24,current:'leaf',next:'water',proj:null,fall:[],fx:[],charges:3+save.up.skill,boss:0,wave:1};paused=false;show('game');hud();toast('Bosque Infinito • Onda 1')}function hud(){$('#hLevel').textContent=infinite?'∞'+state.wave:state.level+1;$('#hScore').textContent=state.score;$('#hMoves').textContent=state.moves;$('#hGoal').textContent=state.cleared+'/'+state.goal;$('#skill').textContent=(chars.find(c=>c[0]===selected)?.[1]||'Skill')+': '+state.charges}function shoot(){if(paused||state.proj||state.moves<=0)return;state.moves--;state.proj={x:450,y:1090,vx:Math.cos(aim)*620,vy:Math.sin(aim)*620,type:state.current,power:state.power};state.power=false;state.current=state.next;state.next=rand(infinite?levels[6][1]:levels[state.level][1]);beep(310);hud()}function attach(p){let r=Math.max(0,Math.round((p.y-TOP)/ROW)),c=Math.max(0,Math.min(8,Math.round((p.x-LEFT-(r%2?COL/2:0))/COL)));if(state.cells.has(key(r,c))){let opts=near(r,c).filter(([a,b])=>a>=0&&b>=0&&b<9&&!state.cells.has(key(a,b)));if(!opts.length){state.proj=null;return}[r,c]=opts[0]}let b={r,c,type:p.type,sp:null,hp:1};state.cells.set(key(r,c),b);if(p.power&&selected==='bram'){near(r,c).forEach(([a,d])=>{let n=state.cells.get(key(a,d));if(n&&n.r>0){state.cells.delete(key(a,d));state.cleared++;state.score+=12}})}state.proj=null;resolve(b)}function resolve(st){let seen=new Set(),g=[],q=[st];while(q.length){let b=q.pop(),k=key(b.r,b.c);if(seen.has(k))continue;seen.add(k);if(b.type!==st.type)continue;g.push(b);near(b.r,b.c).forEach(([a,c])=>{let n=state.cells.get(key(a,c));if(n)q.push(n)})}if(g.length>=3){let rem=0;g.forEach(b=>{if(b.sp==='shell'&&st.type!=='stone'&&b.hp>1){b.hp--;return}state.cells.delete(key(b.r,b.c));rem++;if(b.sp==='totem'){state.moves++;state.score+=40}});state.cleared+=rem;state.score+=(rem*12+Math.max(0,g.length-3)*20)*(1+save.up.score*.1);if(st.type==='fire')for(let b of [...state.cells.values()])if(b.sp==='vine'&&Math.abs(b.r-st.r)<=1){state.cells.delete(key(b.r,b.c));state.cleared++;state.score+=25}drop();if(state.boss&&g.length>=4){state.boss--;toast('Chefe atingido!');beep(180);if(state.boss<=0)state.cleared=state.goal}if(g.length>=5){toast('COMBO NATURAL!');beep(720)}}else if(challengeMode==='storm'||levels[state.level]?.[4]==='current'){if(state.moves%3===0)wind()}hud();check()}function drop(){let con=new Set(),q=[...state.cells.values()].filter(b=>b.r===0);while(q.length){let b=q.pop(),k=key(b.r,b.c);if(con.has(k))continue;con.add(k);near(b.r,b.c).forEach(([a,c])=>{let n=state.cells.get(key(a,c));if(n)q.push(n)})}for(let b of [...state.cells.values()])if(!con.has(key(b.r,b.c))){state.cells.delete(key(b.r,b.c));let p=pos(b.r,b.c);state.fall.push({x:p.x,y:p.y,vy:50,type:b.type});state.cleared++;state.score+=20}}function wind(){let vals=[...state.cells.values()].map(b=>({...b})),dir=state.moves%2?1:-1;state.cells.clear();vals.forEach(b=>{b.c+=dir;if(b.c>=0&&b.c<9&&!state.cells.has(key(b.r,b.c)))state.cells.set(key(b.r,b.c),b)});toast('O vento moveu o campo!')}function skill(){if(paused||!state||state.proj||state.charges<=0||challengeMode==='sealed')return toast('Habilidade indisponível');if(selected==='ayla')[state.current,state.next]=[state.next,state.current];else if(selected==='bram')state.power=true;else state.current='water';state.charges--;beep(620);hud()}function check(){if(state.cleared>=state.goal||state.cells.size===0){if(infinite){let reward=10+state.wave*3;save.ess+=reward;save.infinite=Math.max(save.infinite,state.wave);persist();state.wave++;state.cells=createCells(Math.min(10,5+(state.wave/2|0)),levels[6][1],state.wave);state.cleared=0;state.goal=24+(state.wave-1)*5;state.moves+=6;toast('Onda '+state.wave+' • +'+reward+' ✦');hud();return}finish(true);return}let danger=[...state.cells.values()].some(b=>pos(b.r,b.c).y>920);if(state.moves<=0||danger)finish(false)}function finish(win){paused=true;if(infinite){$('#rTitle').textContent='Fim da incursão';$('#rStars').textContent='∞';$('#rText').textContent='Você chegou à onda '+state.wave+'. Recorde: '+save.infinite;$('#rReward').textContent='Pontuação: '+Math.round(state.score);$('#next').style.display='none';$('#result').classList.remove('hide');return}let i=state.level,l=levels[i],ratio=state.moves/Math.max(1,l[3]),stars=win?(ratio>.38?3:ratio>.15?2:1):0,old=save.stars[i]||0,reward=win?(10+stars*8+Math.max(0,stars-old)*10+(challengeMode?challenges[challengeMode][2]:0)):0;if(win){save.stars[i]=Math.max(old,stars);save.best[i]=Math.max(save.best[i]||0,Math.round(state.score));save.unlocked=Math.max(save.unlocked,i+2);save.ess+=reward;persist()}$('#rTitle').textContent=win?'Vitória!':'A trilha resistiu';$('#rStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);$('#rText').textContent=win?'Pontuação: '+Math.round(state.score):'Tente uma estratégia diferente.';$('#rReward').textContent=win?'Recompensa: +'+reward+' ✦':'';$('#next').style.display=win&&i<8?'inline-block':'none';$('#result').classList.remove('hide');beep(win?650:160,.16)}function draw(){if(!state)return;let grad=ctx.createLinearGradient(0,0,0,H);grad.addColorStop(0,['#9dcb79','#728067','#9cc8aa','#c4a26f','#91a47b','#718761','#93bc72','#af8c61','#566f4b'][state.level]||'#8eae73');grad.addColorStop(1,'#2e4932');ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);ctx.globalAlpha=.16;for(let i=0;i<8;i++){ctx.fillStyle='#153518';ctx.beginPath();ctx.arc(40+i*140,100+Math.sin(i)*25,110,0,7);ctx.fill()}ctx.globalAlpha=1;if(state.boss){ctx.fillStyle='#fff0bf';ctx.font='bold 26px sans-serif';ctx.textAlign='center';ctx.fillText(('♥'.repeat(state.boss))+' CHEFE',450,45)}for(let b of state.cells.values()){let p=pos(b.r,b.c);ctx.fillStyle='#0003';ctx.beginPath();ctx.arc(p.x+3,p.y+6,R,0,7);ctx.fill();ctx.fillStyle=C[b.type];ctx.beginPath();ctx.arc(p.x,p.y,R,0,7);ctx.fill();ctx.lineWidth=b.sp==='shell'?8:4;ctx.strokeStyle=b.sp==='shell'?'#544a3c':'#fff5';ctx.stroke();ctx.font='28px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(E[b.type],p.x,p.y+1);if(b.sp==='vine')ctx.fillText('🌿',p.x,p.y);if(b.sp==='totem')ctx.fillText('ᛟ',p.x,p.y)}if(state.proj){ctx.fillStyle=C[state.proj.type];ctx.beginPath();ctx.arc(state.proj.x,state.proj.y,R,0,7);ctx.fill();ctx.font='28px sans-serif';ctx.fillText(E[state.proj.type],state.proj.x,state.proj.y)}state.fall.forEach(p=>{ctx.fillStyle=C[p.type];ctx.beginPath();ctx.arc(p.x,p.y,R,0,7);ctx.fill()});ctx.strokeStyle='#ffffff80';ctx.setLineDash([10,16]);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(450,1090);ctx.lineTo(450+Math.cos(aim)*380,1090+Math.sin(aim)*380);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#5e4327';ctx.beginPath();ctx.arc(450,1110,62,0,7);ctx.fill();ctx.fillStyle=C[state.current];ctx.beginPath();ctx.arc(450,1090,35,0,7);ctx.fill();ctx.font='32px sans-serif';ctx.fillText(E[state.current],450,1090);ctx.fillStyle=C[state.next];ctx.beginPath();ctx.arc(550,1100,24,0,7);ctx.fill();ctx.font='20px sans-serif';ctx.fillText(E[state.next],550,1100);ctx.fillStyle='#ffe7a6';ctx.font='bold 20px sans-serif';ctx.fillText(chars.find(c=>c[0]===selected)?.[2]||'🌿',335,1110)}function update(dt){if(!state||paused)return;if(state.proj){let p=state.proj;p.x+=p.vx*dt;p.y+=p.vy*dt;if(p.x<R){p.x=R;p.vx=Math.abs(p.vx)}if(p.x>W-R){p.x=W-R;p.vx=-Math.abs(p.vx)}let hit=p.y<TOP+R;if(!hit)for(let b of state.cells.values()){let q=pos(b.r,b.c);if(Math.hypot(q.x-p.x,q.y-p.y)<R*1.85){hit=true;break}}if(hit)attach(p)}state.fall.forEach(p=>{p.y+=p.vy*dt;p.vy+=700*dt});state.fall=state.fall.filter(p=>p.y<H+80)}let last=performance.now();function loop(n){let dt=Math.min(.033,(n-last)/1000);last=n;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);function cp(e){let r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}function setAim(p){aim=Math.max(-Math.PI+.18,Math.min(-.18,Math.atan2(p.y-1090,p.x-450)))}cv.onpointerdown=e=>{if(paused)return;down=true;setAim(cp(e))};cv.onpointermove=e=>{if(down&&!paused)setAim(cp(e))};cv.onpointerup=e=>{if(paused)return;setAim(cp(e));down=false;shoot()};onkeydown=e=>{if(!state)return;if(e.key==='ArrowLeft')aim=Math.max(-Math.PI+.18,aim-.08);if(e.key==='ArrowRight')aim=Math.min(-.18,aim+.08);if(e.code==='Space'){e.preventDefault();shoot()}if(e.key==='q'||e.key==='Q')skill();if(e.key==='Escape')togglePause()};function togglePause(){if(!state)return;paused=!paused;$('#pauseOv').classList.toggle('hide',!paused)}$('#play').onclick=()=>{challengeMode=null;renderChars();show('chars')};$('#world').onclick=()=>{challengeMode=null;renderLevels();show('levels')};$('#upgrades').onclick=()=>{renderUps();show('ups')};$('#challenge').onclick=()=>{renderChallenges();show('challenges')};$('#endless').onclick=()=>{if(save.unlocked<=8)return toast('Conclua a campanha para desbloquear');startInfinite()};$('#sound').onclick=()=>{save.sound=!save.sound;persist();$('#sound').textContent='Som: '+(save.sound?'Ligado':'Desligado')};$('#sound').textContent='Som: '+(save.sound?'Ligado':'Desligado');document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>show('menu'));$('#skill').onclick=skill;$('#pause').onclick=togglePause;$('#resume').onclick=togglePause;$('#restart').onclick=()=>infinite?startInfinite():start(state.level);$('#quit').onclick=()=>{paused=false;renderLevels();show('levels')};$('#retry').onclick=()=>infinite?startInfinite():start(state.level);$('#rMenu').onclick=()=>{paused=false;renderLevels();show('levels')};$('#next').onclick=()=>start(Math.min(8,state.level+1));</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#2f4f2f" />
+  <title>Mystic Grove</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="loadingOverlay" class="loading-overlay visible">
+    <div class="loading-card">
+      <div class="loading-mark">✦</div>
+      <h1>MYSTIC GROVE</h1>
+      <p id="loadingText">Despertando a floresta...</p>
+      <div class="loading-bar"><span id="loadingBarFill"></span></div>
+      <small id="loadingPercent">0%</small>
+    </div>
+  </div>
+
+  <div id="app">
+    <section id="menu" class="screen active">
+      <div class="menu-card premium">
+        <div class="menu-glow"></div>
+        <div class="logo-wrap">
+          <div class="logo-mark">🪶</div>
+          <h1>MYSTIC GROVE</h1>
+          <p>Action-puzzle de natureza mágica, reações em cadeia e guardiões ancestrais.</p>
+        </div>
+
+        <div class="menu-badges">
+          <span>9 fases</span>
+          <span>3 guardiões</span>
+          <span>chefes + boss final</span>
+          <span>habilidades</span>
+        </div>
+
+        <div class="menu-actions">
+          <button id="playBtn" class="primary">Jogar</button>
+          <button id="worldMapBtn">Mapa da campanha</button>
+          <button id="upgradeBtn">Melhorias permanentes</button>
+          <button id="challengeBtn">Modo desafio</button>
+          <button id="achievementsBtn">Conquistas</button>
+          <button id="infiniteBtn">Bosque Infinito</button>
+          <button id="howBtn">Como jogar</button>
+          <button id="soundBtn">Som: Ligado</button>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-box"><strong>Reações</strong><small>Fogo, água, vento e pedra alteram o tabuleiro.</small></div>
+          <div class="feature-box"><strong>Chefes</strong><small>Encontros especiais mudam o ritmo da fase.</small></div>
+          <div class="feature-box"><strong>Precisão</strong><small>Recochete, queda e posicionamento contam muito.</small></div>
+          <div class="feature-box"><strong>Progressão</strong><small>Desbloqueio local de trilhas e desafios mais difíceis.</small></div>
+        </div>
+
+        <small>Jogo original • v0.8.0</small>
+      </div>
+    </section>
+
+    <section id="characterSelect" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Escolha seu guardião</h2>
+        <p>Cada personagem muda sua estratégia durante as fases.</p>
+        <div id="characterGrid" class="character-grid"></div>
+        <button id="charBackBtn">Voltar</button>
+      </div>
+    </section>
+
+    <section id="levelSelect" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Escolha uma trilha</h2>
+        <p class="subline">As fases finais exigem melhor uso das habilidades e das reações elementais.</p>
+        <div id="levelGrid" class="level-grid"></div>
+        <button id="backMenuBtn">Voltar</button>
+      </div>
+    </section>
+
+
+
+    <section id="worldMap" class="screen">
+      <div class="panel wide premium-panel world-panel">
+        <h2>Mapa da campanha</h2>
+        <p class="subline">Explore as nove trilhas, complete missões e conquiste a Relíquia de cada região.</p>
+        <div id="worldSummary" class="currency-bar"></div>
+        <div id="worldMapGrid" class="world-map-grid"></div>
+        <div class="world-legend"><span>★ estrelas</span><span>📜 missão</span><span>◆ relíquia</span></div>
+        <button id="worldBackBtn">Voltar</button>
+      </div>
+    </section>
+
+    <section id="infiniteMode" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Bosque Infinito</h2>
+        <p class="subline">Uma sequência sem fim de ondas cada vez mais difíceis. O tabuleiro é reconstruído entre ondas, mas sua pontuação continua.</p>
+        <div id="infiniteStatus" class="currency-bar"></div>
+        <div class="infinite-rules">
+          <div><strong>Ondas progressivas</strong><small>Mais peças, proteções e metas a cada rodada.</small></div>
+          <div><strong>Recompensa contínua</strong><small>Cada onda concluída rende Essência imediatamente.</small></div>
+          <div><strong>Recorde permanente</strong><small>Seu melhor número de ondas fica salvo.</small></div>
+        </div>
+        <button id="startInfiniteBtn" class="primary">Entrar no Bosque Infinito</button>
+        <button id="infiniteBackBtn">Voltar</button>
+      </div>
+    </section>
+
+    <section id="upgrades" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Melhorias permanentes</h2>
+        <p class="subline">Use Essência do Bosque conquistada nas fases para fortalecer todos os guardiões.</p>
+        <div class="currency-bar">Essência: <strong id="essenceValue">0</strong> ✦</div>
+        <div id="upgradeGrid" class="upgrade-grid"></div>
+        <button id="upgradeBackBtn">Voltar</button>
+      </div>
+    </section>
+
+
+    <section id="challenges" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Modo desafio</h2>
+        <p class="subline">Escolha uma regra especial. Desafios rendem Essência extra e possuem recordes próprios.</p>
+        <div id="challengeGrid" class="challenge-grid"></div>
+        <button id="challengeBackBtn">Voltar</button>
+      </div>
+    </section>
+
+    <section id="achievements" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Conquistas</h2>
+        <p class="subline">Objetivos permanentes de toda a campanha.</p>
+        <div id="achievementSummary" class="currency-bar"></div>
+        <div id="achievementGrid" class="achievement-grid"></div>
+        <button id="achievementsBackBtn">Voltar</button>
+      </div>
+    </section>
+
+    <section id="how" class="screen">
+      <div class="panel wide premium-panel">
+        <h2>Como jogar</h2>
+        <p>Mire e lance sementes elementais. Junte <b>3 ou mais</b> do mesmo elemento para liberar energia.</p>
+        <p>Reações especiais: <b>água</b> fortalece brotos, <b>fogo</b> queima cipós, <b>vento</b> empurra grupos e <b>pedra</b> quebra cascas resistentes.</p>
+        <p>Peças sem sustentação caem e viram bônus. Correnteza, vento, armaduras, totems, chefes e habilidades dos guardiões alteram o tabuleiro.</p>
+        <p><b>Mouse/toque:</b> arraste para mirar e solte para disparar.</p>
+        <p><b>Teclado:</b> ← → para mirar, <b>Espaço</b> para disparar, <b>Q</b> para a habilidade e <b>Esc</b> para pausar.</p>
+        <button id="howBackBtn">Voltar</button>
+      </div>
+    </section>
+
+    <section id="game" class="screen">
+      <div class="hud ornate-hud">
+        <div class="hud-box"><span class="hud-label">Fase</span><strong id="hudLevel">1</strong></div>
+        <div class="hud-box"><span class="hud-label">Pontos</span><strong id="hudScore">0</strong></div>
+        <div class="hud-box"><span class="hud-label">Jogadas</span><strong id="hudMoves">0</strong></div>
+        <div class="hud-box"><span class="hud-label">Objetivo</span><strong id="hudGoal">0</strong></div>
+        <div class="goal-meter"><span id="goalBar"></span></div>
+        <div class="hud-mission"><span>Missão</span><strong id="hudMission">—</strong></div>
+        <button id="skillBtn" class="skill-btn">Habilidade</button>
+        <button id="pauseBtn">Ⅱ</button>
+      </div>
+
+      <div id="canvasWrap">
+        <canvas id="gameCanvas" width="900" height="1200"></canvas>
+        <div id="toast"></div>
+        <div id="pauseOverlay" class="overlay hidden">
+          <div class="panel premium-panel">
+            <h2>Pausado</h2>
+            <button id="resumeBtn" class="primary">Continuar</button>
+            <button id="restartBtn">Reiniciar</button>
+            <button id="quitBtn">Sair</button>
+          </div>
+        </div>
+        <div id="resultOverlay" class="overlay hidden">
+          <div class="panel premium-panel">
+            <h2 id="resultTitle">Vitória!</h2>
+            <p id="resultText"></p>
+            <div id="resultStars" class="result-stars">☆☆☆</div>
+            <div id="resultRewards" class="result-rewards"></div>
+            <div id="missionResult" class="mission-result"></div>
+            <button id="nextBtn" class="primary">Próxima fase</button>
+            <button id="retryBtn">Jogar novamente</button>
+            <button id="resultMenuBtn">Seleção de fases</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
